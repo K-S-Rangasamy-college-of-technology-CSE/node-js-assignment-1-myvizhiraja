@@ -1,0 +1,25 @@
+const fs = require('fs');
+const path = './example.txt';
+
+fs.writeFileSync(path, 'Hello, this is a sample text file.');
+
+console.log('--- Blocking Code Example ---');
+try {
+    const blockingData = fs.readFileSync(path, 'utf8');
+    console.log('Blocking read:', blockingData);
+} catch (err) {
+    console.error('Error reading file (blocking):', err);
+}
+
+console.log('This will print after the blocking file read.\n');
+
+console.log('--- Non-Blocking Code Example ---');
+
+fs.readFile(path, 'utf8', (err, nonBlockingData) => {
+    if (err) {
+        return console.error('Error reading file (non-blocking):', err);
+    }
+    console.log('Non-blocking read:', nonBlockingData);
+});
+
+console.log('This will print immediately, without waiting for the non-blocking file read.');
