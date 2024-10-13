@@ -1,0 +1,27 @@
+const repl = require('repl');
+
+function checkOddOrEven(num) {
+    if (num % 2 === 0) {
+        return `${num} is even.`;
+    } else {
+        return `${num} is odd.`;
+    }
+}
+
+const server = repl.start('> ');
+
+server.defineCommand('check', {
+    help: 'Check if a number is odd or even',
+    action(input) {
+        const num = parseInt(input, 10);
+        if (isNaN(num)) {
+            console.log('Please enter a valid number.');
+        } else {
+            console.log(checkOddOrEven(num));
+        }
+        this.displayPrompt();
+    }
+});
+
+console.log('Type .check <number> to check if the number is odd or even.');
+console.log('Type .exit to quit the REPL.');
