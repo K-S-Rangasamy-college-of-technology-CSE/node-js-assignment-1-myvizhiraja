@@ -1,0 +1,18 @@
+const dns = require('dns');
+
+function resolveDomain(domain) {
+    dns.resolve4(domain, (err, addresses) => {
+        if (err) {
+            console.error('Error resolving domain:', err);
+            return;
+        }
+        console.log(`IP addresses for ${domain}:`);
+        addresses.forEach((address) => {
+            console.log(address);
+        });
+    });
+}
+
+const domainName = 'example.com';
+console.log(`Resolving IP addresses for ${domainName}...`);
+resolveDomain(domainName);
